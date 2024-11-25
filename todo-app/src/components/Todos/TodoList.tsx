@@ -1,6 +1,4 @@
-import { useSelector } from 'react-redux';
 import { Todo } from './Todo'
-import { RootState } from './store';
 
 export type Task = {
   id: number;
@@ -9,11 +7,13 @@ export type Task = {
   assignee: string;
 }
 
-export const TodoList = () => {
-  const items = useSelector<RootState, Task[]>(state => state.tasks);
+type TodoListProps = {
+  todos: Task[];
+}
 
+export const TodoList = ({ todos }: TodoListProps) => {
   return <ul>
-    {items.map((item) => (
+    {todos.map((item) => (
       <Todo
         key={item.id}
         id={item.id}

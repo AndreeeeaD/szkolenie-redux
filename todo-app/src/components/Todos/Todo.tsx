@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { removeTask } from './store';
+import { removeTask } from '../../store/Todos/actions';
 
 type TodoProps = {
   id: number;
@@ -7,16 +7,6 @@ type TodoProps = {
   estimation: number;
   assignee: string;
 }
-
-// export const Todo = ({ title,estimation, assignee }: TodoProps) => {
-//   return (
-//     <li>
-//       <span>{title}</span>
-//       <span>{estimation}</span>
-//       <span>{props.assignee}</span>
-//     </li>
-//   )
-// }
 
 export const Todo = (props: TodoProps) => {
   const dispatch = useDispatch();
