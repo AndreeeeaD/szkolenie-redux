@@ -1,8 +1,8 @@
-const ADD_TASK = 'ADD TASK';
-const REMOVE_TASK = 'REMOVE TASK';
-const CHANGE_TASK = 'CHANGE TASK';
+export const ADD_TASK = 'ADD TASK';
+export const REMOVE_TASK = 'REMOVE TASK';
+export const CHANGE_TASK = 'CHANGE TASK';
 
-type Task = {
+export type Task = {
   id: number;
   title: string;
   estimation: number;
