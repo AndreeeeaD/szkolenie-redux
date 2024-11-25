@@ -9,7 +9,7 @@ export type Task = {
   assignee: string;
 }
 
-type Action<T, R = {}> = {
+export type Action<T, R = {}> = {
   type: T;
   payload: R;
 }
