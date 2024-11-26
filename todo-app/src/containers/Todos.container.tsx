@@ -9,7 +9,7 @@ export const TodosContainer = () => {
   return (
     <>
       <TodoList todos={items} />
-      <Form onSubmit={() => {}} />
+      <Form />
     </>
   )
 }

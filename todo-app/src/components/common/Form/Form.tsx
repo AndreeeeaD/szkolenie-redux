@@ -1,9 +1,7 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { Input } from '../Input/Input';
-
-type FormProps = {
-  onSubmit: () => void;
-}
+import { useDispatch } from 'react-redux';
+import { addTask } from '../../../store/Todos/actions';
 
 type FormValues = {
   title: string;
@@ -11,9 +9,9 @@ type FormValues = {
   priority: number;
 }
 
-export const Form = ({ onSubmit }: FormProps) => {
+export const Form = () => {
   const [ values, setValues ] = useState<FormValues>({ title: '', assignee: '', priority: 0 });
-  useState();
+  const dispatch = useDispatch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValues({
@@ -27,12 +25,17 @@ export const Form = ({ onSubmit }: FormProps) => {
     // })
   }
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(addTask(values));
+  }
+
   return (
-    <form onSubmit={onSubmit}>
-      <Input onChange={handleChange} value={values.title} id="title" label="Dodaj zadanie" />
-      <Input onChange={handleChange} value={values.assignee} id="assignee" label="Dodaj zadanie" />
-      <Input onChange={handleChange} value={values.priority} id="priority" label="Dodaj zadanie" />
-      <button type="button">Dodaj zadanie</button>
+    <form onSubmit={handleSubmit}>
+      <Input onChange={handleChange} value={values.title} id="title" label="Dodaj tytuł" />
+      <Input onChange={handleChange} value={values.assignee} id="assignee" label="Przypisz do:" />
+      <Input onChange={handleChange} value={values.priority} id="priority" label="Dodaj priorytet" />
+      <button type="submit">Dodaj zadanie</button>
     </form>
   )
 }

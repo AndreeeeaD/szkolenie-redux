@@ -16,10 +16,10 @@ export const Todo = (props: TodoProps) => {
   }
 
   return (
-    <li>
-      <span>{props.title}</span>
-      <span>{props.estimation}</span>
-      <span>{props.assignee}</span>
+    <li style={{ borderBottom: '1px solid blue' }}>
+      <div>Zadanie: {props.title}</div>
+      <div>Estymacja: {props.estimation}</div>
+      <div>Przypisane do: {props.assignee}</div>
 
       <button onClick={handleRemoveTask}>Remove task</button>
     </li>

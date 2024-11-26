@@ -4,11 +4,13 @@ import {
   LoginUserAction,
   LOGOUT_USER,
   LogoutUserAction,
+  UPDATE_ADDED_TASKS,
   UPDATE_DELETED_TASKS,
+  UpdateAddedTasksAction,
   UpdateDeletedTasksAction,
 } from './actions';
 
-type Action = LoginUserAction | LogoutUserAction | UpdateDeletedTasksAction;
+type Action = LoginUserAction | LogoutUserAction | UpdateDeletedTasksAction | UpdateAddedTasksAction;
 
 type UserState = { 
   id: number,
@@ -35,6 +37,15 @@ export const userReducer: Reducer<UserState, Action> = (state = null, action: Ac
     }
     case LOGOUT_USER: {
       return null;
+    }
+    case UPDATE_ADDED_TASKS: {
+      return state ? {
+        ...state,
+        tasks: {
+          ...state.tasks,
+          added: state.tasks.added + 1,
+        }
+      } : null;
     }
     case UPDATE_DELETED_TASKS: {
       return state ? {

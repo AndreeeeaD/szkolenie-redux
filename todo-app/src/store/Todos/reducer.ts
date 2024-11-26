@@ -1,6 +1,7 @@
 import { Reducer } from 'redux';
 import { Task } from '../../components/Todos/TodoList';
 import { ADD_TASK, AddTaskAction, CHANGE_TASK, ChangeTaskAction, REMOVE_TASK, RemoveTaskAction } from './actions';
+import { getHighestId } from '../../utils/getHighestId';
 
 const tasks: Task[] = [
   {
@@ -24,7 +25,7 @@ type Action = AddTaskAction | RemoveTaskAction | ChangeTaskAction;
 export const todoReducer: Reducer<Task[], Action> = (state = initialState, action: Action) => {
   switch(action.type) {
     case ADD_TASK: 
-      return [...state, action.payload as Task] as Task[];
+      return [...state, { ...action.payload, id: getHighestId(state)} as Task] as Task[];
     case REMOVE_TASK:
       return state.filter(task => task.id !== action.payload as number) as Task[];
     case CHANGE_TASK:
