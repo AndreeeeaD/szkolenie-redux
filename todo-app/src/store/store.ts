@@ -8,6 +8,12 @@ import { userPreferencesReducer } from './UserPreferences/reducer'
 import { sayHiOnDispatchEnhancer } from './enhacers';
 import { middlewares } from './middlewares';
 
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION__: any;
+  }
+}
+
 export type AppAction<T, R = {}> = {
   type: T;
   payload: R;
@@ -19,7 +25,11 @@ const rootReducer = combineReducers({
   userPreferences: userPreferencesReducer,
 });
 
-const enhancers = compose(sayHiOnDispatchEnhancer, middlewares);
+const enhancers = compose(
+  sayHiOnDispatchEnhancer,
+  middlewares,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+);
 
 // @ts-ignore
 export const store = createStore(
