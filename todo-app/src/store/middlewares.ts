@@ -4,6 +4,7 @@ import { ADD_TASK, REMOVE_TASK } from './Todos/actions';
 import { updateAddedTasks, updateDeletedTasks } from './User/actions';
 import { AppAction } from './store';
 import { Task } from '../components/Todos/TodoList';
+import { getRandomEstimation } from '../utils/getRandomEstimation';
 
 const updateTasksMiddleware: Middleware = (store) => (next) => (action) => {
   const tempAction = action;
@@ -16,7 +17,7 @@ const updateTasksMiddleware: Middleware = (store) => (next) => (action) => {
     
     (tempAction as InternalAction).payload = {
       ...(tempAction as InternalAction).payload,
-      estimation: Math.floor(Math.random() * 100),
+      estimation: getRandomEstimation(100),
     };
     
     store.dispatch(updateAddedTasks());

@@ -12,7 +12,7 @@ type TodoListProps = {
 }
 
 export const TodoList = ({ todos }: TodoListProps) => {
-  return <ul>
+  return <ul style={{ maxWidth: '20em'}}>
     {todos.map((item) => (
       <Todo
         key={item.id}
