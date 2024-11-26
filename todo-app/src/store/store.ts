@@ -1,17 +1,30 @@
-import { combineReducers, createStore } from 'redux';
+import {  combineReducers, compose } from 'redux';
+import { createStore} from 'redux'
+
 import { todoReducer } from './Todos/reducer';
 import { userReducer } from './User/reducer';
+import { userPreferencesReducer } from './UserPreferences/reducer'
 
-export type Action<T, R = {}> = {
+import { sayHiOnDispatchEnhancer } from './enhacers';
+import { middlewares } from './middlewares';
+
+export type AppAction<T, R = {}> = {
   type: T;
   payload: R;
-}
+};
 
 const rootReducer = combineReducers({
   tasks: todoReducer,
   user: userReducer,
+  userPreferences: userPreferencesReducer,
 });
 
-export const store = createStore(rootReducer);
+const enhancers = compose(sayHiOnDispatchEnhancer, middlewares);
 
-export type RootState = ReturnType<typeof store.getState>;
+// @ts-ignore
+export const store = createStore(
+  rootReducer,
+  enhancers,
+);
+
+export type RootState = ReturnType<typeof rootReducer>;

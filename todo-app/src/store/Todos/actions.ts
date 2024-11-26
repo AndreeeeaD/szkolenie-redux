@@ -1,9 +1,13 @@
 import { Task } from '../../components/Todos/TodoList';
-import { Action } from '../store';
+import { AppAction as Action } from '../store';
 
 export const ADD_TASK = 'ADD TASK';
 export const REMOVE_TASK = 'REMOVE TASK';
 export const CHANGE_TASK = 'CHANGE TASK';
+
+export type AddTaskAction = Action<typeof ADD_TASK, Partial<Task>>;
+export type RemoveTaskAction = Action<typeof REMOVE_TASK, number>;
+export type ChangeTaskAction = Action<typeof CHANGE_TASK, { idToChange: number; task: Partial<Task> }> 
 
 export const addTask = (task: Partial<Task>): Action<typeof ADD_TASK, Partial<Task>> => ({
   type: ADD_TASK,

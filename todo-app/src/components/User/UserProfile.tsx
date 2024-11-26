@@ -6,7 +6,7 @@ export const UserProfile = () => {
   const user = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     dispatch(loginUser());
   };
 
@@ -21,6 +21,7 @@ export const UserProfile = () => {
   return user && (
     <>
       <div>{user?.name}</div>
+      <div>Zadania: [ done: {user.tasks.done}, deleted: {user.tasks.deleted}, added: {user.tasks.added}]</div>
       <button onClick={handleLogout}>Logout</button>
     </>
   )
