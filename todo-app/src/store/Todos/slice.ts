@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Task } from '../../components/Todos/TodoList';
 
-const tasks: Task[] = [
+export const tasks: Task[] = [
   {
     id: 1,
     title: 'Task 1',

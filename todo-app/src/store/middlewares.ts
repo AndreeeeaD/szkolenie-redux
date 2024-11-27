@@ -9,8 +9,6 @@ import { getRandomEstimation } from '../utils/getRandomEstimation';
 const updateTasksMiddleware: Middleware = (store) => (next) => (action) => {
   const tempAction = action;
 
-  console.log()
-
   if ((action as Action).type === removeTask.type) {
     store.dispatch(updateDeletedTasks());
   }

@@ -5,7 +5,7 @@ import userReducer from './User/slice';
 
 import { middlewares } from './middlewares';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
-import commentsReducer from './Comments/reducer';
+import commentsReducer from './Comments/slice';
 import { configureStore } from '@reduxjs/toolkit';
 import { enhancers } from './enhacers';
 import userPreferencesReducer from './UserPreferences/slice';
@@ -18,7 +18,7 @@ export type AppAction<T, R = {}> = {
 const rootReducer = {
   tasks: todoReducer,
   userPreferences: userPreferencesReducer,
-  // comments: commentsReducer,
+  comments: commentsReducer,
   user: userReducer
 };
 
