@@ -37,12 +37,20 @@ export const fetchComments = (): AppThunk => {
   return async (dispatch) => {
     dispatch(fetchCommentsRequest());
     try {
-      const response = await fetch('https://jsonplaceholder.typicode.com/comments');
+      const response = await fetch('https://jsonplaceholder.typicode.com/comment');
       const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch comments');
+      }
 
       dispatch(fetchCommentsSuccess(data));
     } catch (error: unknown) {
-      dispatch(fetchCommentsFailure(error as string));
+      if (error instanceof Error) {
+        dispatch(fetchCommentsFailure(error.message));
+      } else {
+        dispatch(fetchCommentsFailure(error as string));
+      }
     }
   }
 }
