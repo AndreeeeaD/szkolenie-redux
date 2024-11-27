@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store/store'
 import { loginUser, logoutUser } from '../../store/User/actions';
+import { UserName, UserNameBox } from './UserName';
 
 export const UserProfile = () => {
   const user = useSelector((state: RootState) => state.user);
@@ -20,7 +21,11 @@ export const UserProfile = () => {
 
   return user && (
     <>
-      <div>{user?.name}</div>
+      <UserNameBox
+        bottonContent={<div>Witaj w swoim profilu</div>}
+      >
+        <UserName name={user.name}/>
+      </UserNameBox>
       <div>Zadania: [ done: {user.tasks.done}, deleted: {user.tasks.deleted}, added: {user.tasks.added}]</div>
       <button onClick={handleLogout}>Logout</button>
     </>

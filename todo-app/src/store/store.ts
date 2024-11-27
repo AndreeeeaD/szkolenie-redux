@@ -1,4 +1,4 @@
-import {  combineReducers, compose } from 'redux';
+import {  Action, combineReducers, compose, UnknownAction } from 'redux';
 import { createStore} from 'redux'
 
 import { todoReducer } from './Todos/reducer';
@@ -7,6 +7,8 @@ import { userPreferencesReducer } from './UserPreferences/reducer'
 
 import { sayHiOnDispatchEnhancer } from './enhacers';
 import { middlewares } from './middlewares';
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import commentsReducer from './Comments/reducer';
 
 declare global {
   interface Window {
@@ -23,6 +25,7 @@ const rootReducer = combineReducers({
   tasks: todoReducer,
   user: userReducer,
   userPreferences: userPreferencesReducer,
+  comments: commentsReducer,
 });
 
 const enhancers = compose(
@@ -38,3 +41,12 @@ export const store = createStore(
 );
 
 export type RootState = ReturnType<typeof rootReducer>;
+
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;
+
+export type AppDispatch = ThunkDispatch<RootState, unknown, UnknownAction>;
