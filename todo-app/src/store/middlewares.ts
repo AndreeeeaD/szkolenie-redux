@@ -1,11 +1,10 @@
 import logger from 'redux-logger';
-import { Action, applyMiddleware, Middleware } from 'redux';
+import { Action, Middleware } from 'redux';
 import { ADD_TASK, REMOVE_TASK } from './Todos/actions';
 import { updateAddedTasks, updateDeletedTasks } from './User/actions';
 import { AppAction } from './store';
 import { Task } from '../components/Todos/TodoList';
 import { getRandomEstimation } from '../utils/getRandomEstimation';
-import { thunk } from 'redux-thunk';
 
 const updateTasksMiddleware: Middleware = (store) => (next) => (action) => {
   const tempAction = action;
@@ -27,4 +26,4 @@ const updateTasksMiddleware: Middleware = (store) => (next) => (action) => {
   next(tempAction);
 }
 
-export const middlewares = applyMiddleware(logger, updateTasksMiddleware, thunk);
+export const middlewares = [logger, updateTasksMiddleware]

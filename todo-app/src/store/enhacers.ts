@@ -16,3 +16,5 @@ export const sayHiOnDispatchEnhancer: StoreEnhancer = (createStore) => (
 
   return store;
 }
+
+export const enhancers = [sayHiOnDispatchEnhancer];

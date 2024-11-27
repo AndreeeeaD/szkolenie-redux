@@ -1,20 +1,14 @@
-import {  Action, combineReducers, compose, UnknownAction } from 'redux';
-import { createStore} from 'redux'
+import {  Action, combineReducers, UnknownAction } from 'redux';
 
 import { todoReducer } from './Todos/reducer';
 import { userReducer } from './User/reducer';
-import { userPreferencesReducer } from './UserPreferences/reducer'
 
-import { sayHiOnDispatchEnhancer } from './enhacers';
 import { middlewares } from './middlewares';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import commentsReducer from './Comments/reducer';
-
-declare global {
-  interface Window {
-    __REDUX_DEVTOOLS_EXTENSION__: any;
-  }
-}
+import { configureStore } from '@reduxjs/toolkit';
+import { enhancers } from './enhacers';
+import userPreferencesReducer from './UserPreferences/slice';
 
 export type AppAction<T, R = {}> = {
   type: T;
@@ -28,17 +22,12 @@ const rootReducer = combineReducers({
   comments: commentsReducer,
 });
 
-const enhancers = compose(
-  sayHiOnDispatchEnhancer,
-  middlewares,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-);
-
-// @ts-ignore
-export const store = createStore(
-  rootReducer,
-  enhancers,
-);
+export const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middlewares),
+  enhancers: (getDefaultEnhancer) => getDefaultEnhancer().concat(enhancers),
+  devTools: true,
+});
 
 export type RootState = ReturnType<typeof rootReducer>;
 

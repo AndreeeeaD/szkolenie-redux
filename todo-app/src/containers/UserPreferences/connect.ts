@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { UserPreferencesContainer as View } from './UserPreferences.container';
 import { RootState } from '../../store/store';
-import { setTheme } from '../../store/UserPreferences/actions';
+import { setTheme } from '../../store/UserPreferences/slice';
 
 const mapStateToProps = (state: RootState): {
   theme: 'dark' | 'light';
