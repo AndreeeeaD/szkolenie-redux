@@ -14,20 +14,20 @@ export type Comment = {
 }
 
 export const CommentsContainer = () => {
-  const { loading, error, comments } = useSelector((state: RootState) => state.comments);
-  const dispatch = useAppDispatch()
+  // const { loading, error, comments } = useSelector((state: RootState) => state.comments);
+  // const dispatch = useAppDispatch()
 
-  useEffect(() => {
-    dispatch(fetchComments())
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchComments())
+  // }, []);
 
-  if (loading) {
-    return <div>Loading...</div>
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>
+  // }
 
-  if (error) {
-    return <div>Error: {error}</div>
-  }
+  // if (error) {
+  //   return <div>Error: {error}</div>
+  // }
 
-  return <CommentsList comments={comments} />
+  return <CommentsList comments={[]} />
 }

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store/store'
-import { loginUser, logoutUser } from '../../store/User/actions';
+import { loginUser, logoutUser } from '../../store/User/slice';
 import { UserName, UserNameBox } from './UserName';
 
 export const UserProfile = () => {
@@ -15,19 +15,19 @@ export const UserProfile = () => {
     dispatch(logoutUser());
   };
 
-  if (!user) {
+  if (!user?.name) {
     return <button onClick={handleLogin}>Login</button>
   }
 
-  return user && (
+  return user && user.tasks ? (
     <>
       <UserNameBox
         bottonContent={<div>Witaj w swoim profilu</div>}
       >
-        <UserName name={user.name}/>
+        {user.name && <UserName name={user.name}/>}
       </UserNameBox>
       <div>Zadania: [ done: {user.tasks.done}, deleted: {user.tasks.deleted}, added: {user.tasks.added}]</div>
       <button onClick={handleLogout}>Logout</button>
     </>
-  )
+  ) : null;
 }

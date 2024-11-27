@@ -1,19 +1,22 @@
 import logger from 'redux-logger';
 import { Action, Middleware } from 'redux';
-import { ADD_TASK, REMOVE_TASK } from './Todos/actions';
-import { updateAddedTasks, updateDeletedTasks } from './User/actions';
+import { addTask, removeTask } from './Todos/slice';
+import { updateAddedTasks, updateDeletedTasks } from './User/slice';
 import { AppAction } from './store';
 import { Task } from '../components/Todos/TodoList';
 import { getRandomEstimation } from '../utils/getRandomEstimation';
 
 const updateTasksMiddleware: Middleware = (store) => (next) => (action) => {
   const tempAction = action;
-  if ((action as Action).type === REMOVE_TASK) {
+
+  console.log()
+
+  if ((action as Action).type === removeTask.type) {
     store.dispatch(updateDeletedTasks());
   }
 
-  if ((action as Action).type === ADD_TASK) {
-    type InternalAction = AppAction<typeof ADD_TASK, Task>;
+  if ((action as Action).type === addTask.type) {
+    type InternalAction = AppAction<typeof addTask.type, Task>;
     
     (tempAction as InternalAction).payload = {
       ...(tempAction as InternalAction).payload,

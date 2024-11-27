@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-type UserPreferencesState = { theme: 'light' | 'dark'}; 
+export type UserPreferencesState = { theme: 'light' | 'dark'}; 
 
 const initialState: UserPreferencesState = {
   theme: 'light',

@@ -1,7 +1,7 @@
-import {  Action, combineReducers, UnknownAction } from 'redux';
+import {  Action, UnknownAction } from 'redux';
 
-import { todoReducer } from './Todos/reducer';
-import { userReducer } from './User/reducer';
+import todoReducer from './Todos/slice';
+import userReducer from './User/slice';
 
 import { middlewares } from './middlewares';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
@@ -15,12 +15,12 @@ export type AppAction<T, R = {}> = {
   payload: R;
 };
 
-const rootReducer = combineReducers({
+const rootReducer = {
   tasks: todoReducer,
-  user: userReducer,
   userPreferences: userPreferencesReducer,
-  comments: commentsReducer,
-});
+  // comments: commentsReducer,
+  user: userReducer
+};
 
 export const store = configureStore({
   reducer: rootReducer,
@@ -29,7 +29,7 @@ export const store = configureStore({
   devTools: true,
 });
 
-export type RootState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<typeof store.getState>;
 
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,

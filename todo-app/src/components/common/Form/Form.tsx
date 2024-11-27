@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react';
 import { Input } from '../Input/Input';
 import { useDispatch } from 'react-redux';
-import { addTask } from '../../../store/Todos/actions';
+import { addTask } from '../../../store/Todos/slice';
 
 type FormValues = {
   title: string;

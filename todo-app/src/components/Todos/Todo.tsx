@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { removeTask } from '../../store/Todos/actions';
+import { removeTask } from '../../store/Todos/slice';
 
 type TodoProps = {
   id: number;
